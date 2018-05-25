@@ -98,7 +98,7 @@ void checarFrutitas() {
 			exit(0);
 		}
 	}
-
+	//////
 
 }
 void actualizar() { 
