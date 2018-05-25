@@ -91,9 +91,9 @@ void checarColisiones() {
 
 void checarFrutitas() {
 
-	if (tacoma->coordenadas.x <= 1.0f / 0.8f && tacoma->coordenadas.z <= 1.0f / 0.8f)
+	if (tacoma->coordenadas.x <= 0.5f / 0.8f || tacoma->coordenadas.x <= 0.5f / 0.8f)
 	{
-		if (tacoma->coordenadas.x >= -1.0f / 0.8f && tacoma->coordenadas.z  <= -1.0f / 0.8f)
+		if (tacoma->coordenadas.z >= -0.5f / 0.8f || tacoma->coordenadas.z  <= -0.5f / 0.8f)
 		{
 			exit(0);
 		}
@@ -105,38 +105,27 @@ void actualizar() {
 	double tiempoActual = glfwGetTime();
 	double tiempoDelta = tiempoActual - tiempoAnterior;
 
-	
+	int buttonCount;
+	const unsigned char *buttons = glfwGetJoystickButtons(GLFW_JOYSTICK_1, &buttonCount);
 
-	/*int estadoDerecha = glfwGetKey(window,GLFW_KEY_RIGHT);
-	if (estadoDerecha == GLFW_PRESS) {
-		posicionCamara.x += 0.01;
-	}
-
-	int estadoIzquierda = glfwGetKey(window, GLFW_KEY_LEFT);
-	if (estadoIzquierda == GLFW_PRESS) {
-		posicionCamara.x -= 0.01;
-	}*/
-	
-	//Movimiento tacoma
-	int estadoDerecha = glfwGetKey(window, GLFW_KEY_RIGHT);
-	if (estadoDerecha == GLFW_PRESS) {
+	if (GLFW_PRESS == buttons[1]) {
 		tacoma->direccion = 0;
 	}
-	
 	int estadoIzquierda = glfwGetKey(window, GLFW_KEY_LEFT);
-	if (estadoIzquierda == GLFW_PRESS) {
+	if (GLFW_PRESS == buttons[2]) {
 		tacoma->direccion = 1;
 	}
 
 	int estadoArriba = glfwGetKey(window, GLFW_KEY_UP);
-	if (estadoArriba == GLFW_PRESS) {
+	if (GLFW_PRESS == buttons[3]) {
 		tacoma->direccion = 2;
 	}
-
 	int estadoAbajo = glfwGetKey(window, GLFW_KEY_DOWN);
-	if (estadoAbajo == GLFW_PRESS) {
+	if (GLFW_PRESS == buttons[0]) {
 		tacoma->direccion = 3;
 	}
+
+
 
 	checarColisiones();
 	checarFrutitas();
